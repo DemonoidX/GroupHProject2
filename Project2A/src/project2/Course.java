@@ -13,7 +13,7 @@ public class Course {
     int credit;
     Course prereq;
     boolean done;
-    Semesters sem;
+    Semester sem;
     
     public Course() {
         name = "";
@@ -53,4 +53,35 @@ public class Course {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    public Semester getSem() {
+        return sem;
+    }
+
+    public void setSem(Semester sem) {
+        if(this.sem == sem) {
+            return;
+        }
+        //check if the course is already assigned
+        //to another semester
+        if(this.sem != null) {
+            this.sem.removeCourse(this);
+        }
+        
+        this.sem = sem;
+    }
+    
+    @Override
+    public String toString() {
+        String tmp = name;
+        if(done) {
+            tmp = tmp + " (completed)";
+        }
+        else {
+            tmp= tmp +" " + credit;
+        }
+        
+        return tmp;
+        
+    } // end toString
 }
